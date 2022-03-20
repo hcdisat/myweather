@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
+import com.hcdisat.myweather.R
 import com.hcdisat.myweather.databinding.FragmentSearchCityBinding
-import com.squareup.picasso.Picasso
+
+const val SEARCH_TERM = "SEARCH_TERM"
 
 class SearchCityFragment : Fragment() {
 
@@ -19,10 +23,20 @@ class SearchCityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        Picasso.get()
-            .load("http://openweathermap.org/img/wn/10d@6x.png")
-            .into(binding.testIcon)
+        binding.searchCity.addTextChangedListener{
+            binding.btnSearchCity.isEnabled =  it?.isNotEmpty() ?: false
+        }
+        binding.btnSearchCity.setOnClickListener(::loadResults)
 
         return binding.root
+    }
+
+    private fun loadResults(view: View) {
+        findNavController().navigate(
+            R.id.action_searchFragment_to_forecastFragment,
+            Bundle().apply {
+                putString(SEARCH_TERM, binding.searchCity.text.toString())
+            }
+        )
     }
 }

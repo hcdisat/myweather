@@ -9,7 +9,8 @@ import com.hcdisat.myweather.extensions.forDate
 import com.hcdisat.myweather.models.Forecast
 
 class WeatherAdapter(
-    private val forecast: MutableList<Forecast> = mutableListOf()
+    private val forecast: MutableList<Forecast> = mutableListOf(),
+    private val onHolderClicked: (forecast: Forecast) -> Unit
 ): RecyclerView.Adapter<ForecastViewHolder>() {
 
     fun setForecast(newForecast: List<Forecast>) {
@@ -23,7 +24,7 @@ class WeatherAdapter(
         val view = ForecastItemBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return ForecastViewHolder(view)
+        return ForecastViewHolder(view, onHolderClicked)
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
@@ -34,14 +35,16 @@ class WeatherAdapter(
 }
 
 
-private const val ICON_URL = "https://openweathermap.org/img/w/"
+//private const val ICON_URL = "https://openweathermap.org/img/w/"
 class ForecastViewHolder(
-    private val binding: ForecastItemBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    private val binding: ForecastItemBinding,
+    private val onHolderClicked: (forecast: Forecast) -> Unit
+): RecyclerView.ViewHolder(binding.root) {
 
     fun bind(forecast: Forecast) {
         binding.forecastTime.text = forecast.forDate()
         binding.weatherTemp.text = forecast.main.fahTemp()
         binding.weatherDescription.text = forecast.weather[0].description
+        binding.root.setOnClickListener { onHolderClicked(forecast) }
     }
 }

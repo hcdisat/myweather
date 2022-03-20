@@ -1,11 +1,13 @@
 package com.hcdisat.myweather.models
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
-data class Sys(
+@Parcelize data class Sys(
     @Json(name = "pod")
     val pod: String
-)
+): Parcelable

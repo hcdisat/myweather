@@ -6,8 +6,8 @@ import com.hcdisat.myweather.utils.TempHelper
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun Forecast.forDate(): String {
-    val formatter = SimpleDateFormat("HH:mm")
+fun Forecast.forDate(pattern: String = "HH:mm"): String {
+    val formatter = SimpleDateFormat(pattern)
     val date = Date(this.dt.toLong() * 1000)
     return formatter.format(date)
 }

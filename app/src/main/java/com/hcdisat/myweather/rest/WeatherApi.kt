@@ -18,6 +18,6 @@ interface WeatherApi {
         const val BASE_URL = "https://api.openweathermap.org/"
         private const val FORECAST_PATH = "data/2.5/forecast"
 
-        private const val API_KEY = "65d00499677e59496ca2f318eb68c049"
+        private const val API_KEY = "b5b5842ff9654788357181f2906a68db"
     }
 }

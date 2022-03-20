@@ -19,6 +19,13 @@ class WeatherViewModel(
         MutableLiveData(ResultStates.LOADING)
     val cityForecast: LiveData<ResultStates> get() = _cityForecast
 
+//    private lateinit var _cityToSearch: String
+//    protected var cityToSearch: String
+//    get() = _cityToSearch
+//    set(value) {
+//        _cityToSearch = value
+//    }
+
     fun getForecast(city: String) {
 
         viewModelScope.launch(ioDispatcher) {
