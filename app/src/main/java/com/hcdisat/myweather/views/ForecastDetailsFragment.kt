@@ -41,15 +41,14 @@ class ForecastDetailsFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     private fun bind() {
         forecast?.let {
-            binding.city.text = "@$cityName"
+            binding.city.text = String.format("@$cityName")
             binding.date.text = it.forDate("MM/dd H:m:s")
             binding.description.text = it.weather[0].description
             binding.temp.text = it.main.fahTemp()
-            binding.tempMax.text = "H:${it.main.maxFahTemp()}"
-            binding.tempMin.text = "L:${it.main.minFahTemp()}"
+            binding.tempMax.text = String.format("H:${it.main.maxFahTemp()}")
+            binding.tempMin.text = String.format("L:${it.main.minFahTemp()}")
         }
     }
 }
