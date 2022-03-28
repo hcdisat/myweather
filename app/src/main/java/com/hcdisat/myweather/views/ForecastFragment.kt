@@ -67,7 +67,7 @@ class ForecastFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun handleState(resultState: ResultStates?) {
+    private fun handleState(resultState: ResultStates) {
         when (resultState) {
             is ResultStates.LOADING -> {
                 Toast.makeText(

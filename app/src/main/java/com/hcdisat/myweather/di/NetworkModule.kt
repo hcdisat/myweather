@@ -46,11 +46,6 @@ val networkModule = module {
                 .build()
                 .create(WeatherApi::class.java)
 
-    fun providesWeatherApiRepository(
-        weatherApi: WeatherApi
-    ): WeatherApiRepositoryContract =
-        WeatherApiRepository(weatherApi)
-
     single { providesMoshi() }
     single { provideServiceApi(get(), get()) }
     single { providesOkHttpClient(get()) }

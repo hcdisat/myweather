@@ -2,7 +2,6 @@ package com.hcdisat.myweather.extensions
 
 import com.hcdisat.myweather.models.Forecast
 import com.hcdisat.myweather.models.Main
-import com.hcdisat.myweather.utils.TempHelper
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -13,10 +12,18 @@ fun Forecast.forDate(pattern: String = "HH:mm"): String {
 }
 
 fun Main.fahTemp(): String =
-    TempHelper.formatFah(TempHelper.kelToFah(this.temp))
+    this.temp.kelToFah().formatFah()
 
 fun Main.minFahTemp(): String =
-    TempHelper.formatFah(TempHelper.kelToFah(this.tempMin))
+    this.tempMin.kelToFah().formatFah()
 
 fun Main.maxFahTemp(): String =
-    TempHelper.formatFah(TempHelper.kelToFah(this.tempMax))
+    this.tempMax.kelToFah().formatFah()
+
+fun Double.kelToFah(): Int =
+    (1.8 * (this - 273.15) + 32).toInt()
+
+fun Int.formatFah(): String = "$this°F"
+
+fun Double.getFahFromKel(): String =
+    this.kelToFah().formatFah()
